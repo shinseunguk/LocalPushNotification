@@ -1,0 +1,6 @@
+framework module Pods_LocalPushNotification_LocalPushNotificationUITests {
+  umbrella header "Pods-LocalPushNotification-LocalPushNotificationUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

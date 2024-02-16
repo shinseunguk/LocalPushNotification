@@ -8,12 +8,23 @@
 import UIKit
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+    let userNotificationCenter = UNUserNotificationCenter.current()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        userNotificationCenter.delegate = self
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        
+        userNotificationCenter.requestAuthorization(options: authOptions) { (granted, error) in
+            DispatchQueue.main.async {
+                if granted {
+                    
+                } else {
+                    
+                }
+                UserDefaults.standard.set(true, forKey: "NotificationAuthorizationRequested")
+            }
+        }
         return true
     }
 
@@ -32,5 +43,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
+}
+
+extension AppDelegate {
+    // UNUserNotificationCenterDelegate 메서드 구현
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        // foreground 상태에서 푸시 알림을 처리하는 로직을 구현
+        completionHandler([.alert, .sound, .badge])
+    }
 }
 

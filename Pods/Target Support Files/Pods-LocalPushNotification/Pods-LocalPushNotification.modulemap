@@ -1,0 +1,6 @@
+framework module Pods_LocalPushNotification {
+  umbrella header "Pods-LocalPushNotification-umbrella.h"
+
+  export *
+  module * { export * }
+}
